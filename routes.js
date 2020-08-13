@@ -1,7 +1,8 @@
 export const CONFIG = {
   ACCOUNT: {
-    LOGIN: (username, password) => `/auth/credentials?username=${username}&password=${password}`,
-    REGISTER: '/accounts'
+    LOGIN: (username, password) => `/v2/auth/credentials?username=${username}&password=${password}`,
+    CHECK_AUTH: '/v2/auth',
+    REGISTER: '/v2/membership/users/register'
   },
   PROJECT: {
     DATABASE: {
@@ -45,14 +46,14 @@ export const CONFIG = {
     },
     NOTIFICATIONS: {
       PUSH: {
-        REGISTER_TOKEN: '/v2/notifications/push/token/expo',
-        GET_ALL: (userId, pageNumber, pageSize) => `/v2/notifications/push?userId=${userId}&pageSize=${pageSize}&pageNumber=${pageNumber}`,
+        REGISTER_TOKEN: '/v2/notifications/push/devices/token',
+        DELETE_DEVICE_TOKEN: (id) => `/v2/notifications/push/devices/${id}/token`,
+        GET_ALL: '/v2/notifications/push',
         GET: (id) => `/v2/notifications/push/${id}`,
         MARK_NOTIFICATION_AS_READ: (id) => `/v2/notifications/push/${id}/read`,
         MARK_NOTIFICATIONS_AS_READ: '/v2/notifications/push/read',
-        GET_NOTIFICATIONS_COUNT: (userId) => `/v2/notifications/push/count?userId=${userId}`,
+        GET_NOTIFICATIONS_COUNT: (userId, deviceId) => `/v2/notifications/push/count?userId=${userId}&deviceId=${deviceId}`,
         SEND: '/v2/notifications/push',
-        DELETE_DEVICE_TOKEN: (id) => `/v2/notifications/push/devices/${id}/token`,
         DELETE_DEVICE: (id) => `/v2/notifications/push/devices/${id}`
       },
       EMAIL: {
@@ -74,6 +75,7 @@ export const CONFIG = {
         DELETE: (id) => `/v2/membership/users/${id}`,
         BLOCK: (id) => `/v2/membership/users/${id}/block`,
         UNBLOCK: (id) => `/v2/membership/users/${id}/unblock`,
+        UPDATE_PASSWORD: '/v2/membership/users/password',
         CREATE_PASSWORD_RESET: '/v2/membership/users/password/reset/token',
         CHECK_PASSWORD_RESET: '/v2/membership/users/password/reset/token',
         RESET_PASSWORD: '/v2/membership/users/password/reset',
